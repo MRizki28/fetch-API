@@ -6,10 +6,8 @@ import Modal from "../components/Modal";
 const Home = () => {
     const [mahasiswaData, setMahasiswaData] = useState([]);
     const [formData, setFormData] = useState({
-        // inisialisasi objek formData sesuai dengan kebutuhan Anda
         name: "",
-        // tambahkan properti lain sesuai kebutuhan
-      });
+    });
 
     const fetchData = async () => {
         try {

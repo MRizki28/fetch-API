@@ -36,8 +36,6 @@ const Home = () => {
         try {
             await axios.post("http://localhost:3000/api/v1/mahasiswa/create" , formData);
             document.getElementById("formTambah").reset();
-
-            // Tutup modal dan ambil data terkini
             document.getElementById("my_modal_1").close();
             fetchData();
         } catch (error) {
@@ -51,7 +49,7 @@ const Home = () => {
         <>
             <div className="container mx-auto">
                 <button className="btn btn-primary mt-2 flex ml-auto" onClick={() => document.getElementById('my_modal_1').showModal()}>Tambah Data</button>
-                <Table data={mahasiswaData} />
+                <Table data={mahasiswaData} fetchData={fetchData} />
                 <Modal handleChange={handleChange} handleSubmit={handleSubmit} />
             </div>
         </>

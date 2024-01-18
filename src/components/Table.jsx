@@ -2,10 +2,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import ModalEdit from "./ModalEdit";
 
-const Table = ({ data , fetchData }) => {
+const Table = ({ data, fetchData }) => {
 
     const [mahasiswaData, setMahasiswaData] = useState({
-        name: "" 
+        name: ""
     });
 
     const handleEdit = async (id) => {
@@ -13,7 +13,7 @@ const Table = ({ data , fetchData }) => {
             const response = await axios.get('http://localhost:3000/api/v1/mahasiswa/get/' + id);
             setMahasiswaData(response.data.data);
             document.getElementById('my_modal_2').showModal();
-            console.log(response.data.data); 
+            console.log(response.data.data);
         } catch (error) {
             console.log(error)
         }
@@ -24,6 +24,20 @@ const Table = ({ data , fetchData }) => {
             ...mahasiswaData,
             [e.target.name]: e.target.value
         });
+    };
+
+    const handleSubmit = async (id) => {
+        try {
+            const { name } = mahasiswaData;
+            const response = await axios.put(`http://localhost:3000/api/v1/mahasiswa/update/${id}`, {
+                name
+            });
+            console.log(response.config.url);
+            console.log(response);
+            fetchData();
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     const handleDelete = async (id) => {
@@ -59,8 +73,8 @@ const Table = ({ data , fetchData }) => {
                                 <td className="py-2 px-4 border">{index + 1}</td>
                                 <td className="py-2 px-4 border">{item.name}</td>
                                 <td className="py-2 px-4 border space-x-2">
-                                    <a onClick={() => handleEdit(item.id)} className="btn btn-primary">Edit</a>
-                                    <a onClick={() => handleDelete(item.id)} className="btn btn-error">Delete</a>
+                                    <button onClick={() => handleEdit(item.id)} className="btn btn-primary">Edit</button>
+                                    <button onClick={() => handleDelete(item.id)} className="btn btn-error">Delete</button>
                                 </td>
                             </tr>
                         ))
@@ -70,6 +84,7 @@ const Table = ({ data , fetchData }) => {
 
             <ModalEdit
                 handleChange={handleChange}
+                handleSubmit={() => handleSubmit(mahasiswaData.id)}
                 mahasiswaData={mahasiswaData}>
             </ModalEdit>
         </div>

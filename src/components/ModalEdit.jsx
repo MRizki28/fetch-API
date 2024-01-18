@@ -14,7 +14,7 @@ const ModalEdit = ({handleChange, handleSubmit, mahasiswaData}) => {
                     <form onSubmit={handleSubmit}  method="dialog" id="formTambah">
                         <div className="mb-3 mt-4">
                             <label htmlFor="name" className="block mb-3">Nama </label>
-                            <input type="text" placeholder="Type here" onChange={handleChange} name="name" className="input input-bordered input-md w-full " value={mahasiswaData.name} />
+                            <input type="text" placeholder="Type here"  name="name" id="name" className="input input-bordered input-md w-full " onChange={handleChange} value={mahasiswaData.name} />
                         </div>
                         <div className="flex justify-end space-x-4">
                             <button className="btn" type="button" onClick={handleCloseModal}>Close</button>
